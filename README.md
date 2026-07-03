@@ -1,3 +1,7 @@
+## Live Demo
+
+Frontend: https://sapna-smartbiz-ai.netlify.app/  
+Backend: https://smartbiz-ai-sips.onrender.com
 # SmartBiz AI
 
 SmartBiz AI is an AI-powered invoice and business management system designed for small businesses, freelancers, and local service providers. It allows users to generate professional invoices using natural language, manage customers and products, track invoice history, view analytics, and get smart business insights using AI.
