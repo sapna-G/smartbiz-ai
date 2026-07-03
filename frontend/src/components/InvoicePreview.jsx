@@ -1,5 +1,5 @@
 
-import { downloadPDF } from "../services/api";
+import html2pdf from "html2pdf.js";
 import {
   FaDownload,
   FaPrint,
@@ -11,21 +11,55 @@ import {
 } from "react-icons/fa";
 
 function InvoicePreview({ invoice, html, company }) {
-  async function handleDownload() {
-    try {
-      const pdfBlob = await downloadPDF(html);
-      const url = window.URL.createObjectURL(pdfBlob);
-      const link = document.createElement("a");
+  function handleDownload() {
+  const invoiceElement = document.querySelector(".premium-invoice");
 
-      link.href = url;
-      link.download = "Invoice.pdf";
-      link.click();
-
-      window.URL.revokeObjectURL(url);
-    } catch {
-      alert("Failed to download PDF");
-    }
+  if (!invoiceElement) {
+    alert("Invoice not found.");
+    return;
   }
+
+  const options = {
+    margin: 0.4,
+    filename: "smartbiz-invoice.pdf",
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: {
+      scale: 2,
+      useCORS: true,
+    },
+    jsPDF: {
+      unit: "in",
+      format: "a4",
+      orientation: "portrait",
+    },
+  };
+
+  html2pdf().set(options).from(invoiceElement).save();
+}function handleDownload() {
+  const invoiceElement = document.querySelector(".premium-invoice");
+
+  if (!invoiceElement) {
+    alert("Invoice not found.");
+    return;
+  }
+
+  const options = {
+    margin: 0.4,
+    filename: "smartbiz-invoice.pdf",
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: {
+      scale: 2,
+      useCORS: true,
+    },
+    jsPDF: {
+      unit: "in",
+      format: "a4",
+      orientation: "portrait",
+    },
+  };
+
+  html2pdf().set(options).from(invoiceElement).save();
+}
 
   function handlePrint() {
     window.print();
