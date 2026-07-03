@@ -1,4 +1,5 @@
 
+const cors = require("cors");
 const puppeteer = require("puppeteer");
 const express = require("express");
 const cors = require("cors");
@@ -9,6 +10,18 @@ const generateInvoiceHTML = require("./invoiceTemplate");
 dotenv.config();
 
 const app = express();
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:5174",
+      "https://6a47c5497dcdd775ce6c766d--sapna-smartbiz-ai.netlify.app",
+      "https://sapna-smartbiz-ai.netlify.app",
+    ],
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
 
 app.use(cors());
 app.use(express.json({ limit: "10mb" }));
